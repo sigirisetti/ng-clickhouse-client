@@ -3,7 +3,7 @@ import { VERSION } from '@angular/material/core';
 import {NavItem} from './core/nav/nav-item';
 import {NavService} from './core/nav/nav.service';
 import {NotificationService} from './common/notification.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-root',
