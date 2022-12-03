@@ -143,5 +143,8 @@
     "@schematics/angular:component": {
       "style": "css"
     }
+  },
+  "cli": {
+    "analytics": "abaaead3-54fe-4a59-9fb2-769df6c14142"
   }
 }
