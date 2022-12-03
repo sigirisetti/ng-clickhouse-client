@@ -116,7 +116,6 @@
       }
     }
   },
-  "defaultProject": "nagare-mass-quotes",
   "schematics": {
     "@schematics/angular:component": {
       "style": "css"
