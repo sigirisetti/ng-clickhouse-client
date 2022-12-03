@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TfxLargeComponent } from './tfx-large.component';
 
@@ -6,7 +6,7 @@ describe('TfxLargeComponent', () => {
   let component: TfxLargeComponent;
   let fixture: ComponentFixture<TfxLargeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TfxLargeComponent ]
     })

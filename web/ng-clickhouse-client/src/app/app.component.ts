@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit} from '@angular/core';
-import {VERSION} from '@angular/material';
+import { VERSION } from '@angular/material/core';
 import {NavItem} from './core/nav/nav-item';
 import {NavService} from './core/nav/nav.service';
 import {NotificationService} from './common/notification.service';
