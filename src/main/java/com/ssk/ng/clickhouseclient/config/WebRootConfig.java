@@ -15,7 +15,7 @@ public class WebRootConfig {
     public FilterRegistrationBean corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
@@ -26,6 +26,4 @@ public class WebRootConfig {
         bean.setOrder(0);
         return bean;
     }
-
-
 }

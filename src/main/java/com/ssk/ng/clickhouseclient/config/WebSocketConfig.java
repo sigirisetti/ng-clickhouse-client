@@ -19,7 +19,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
     private SocketHandler socketHandler;
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(socketHandler, "/massquotes").addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
+        registry.addHandler(socketHandler, "/massquotes")
+                .addInterceptors(new HttpSessionHandshakeInterceptor())
+                .setAllowedOrigins("*");
     }
 
     /**

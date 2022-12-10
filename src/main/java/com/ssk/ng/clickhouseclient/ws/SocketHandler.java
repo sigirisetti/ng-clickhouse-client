@@ -66,8 +66,8 @@ public class SocketHandler extends TextWebSocketHandler {
 
     private GuiData getGuiData() {
 
-        int i = rnd.nextInt(TFX_CURRENCIES.length);
-        String symbol = TFX_CURRENCIES[i];
+        int i = rnd.nextInt(FWD_CCY_PAIRS.length);
+        String symbol = FWD_CCY_PAIRS[i];
 
         double mid = initialPrices[i];
         double marketBid = mid - rnd.nextDouble() * 0.05;
