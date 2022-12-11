@@ -9,14 +9,9 @@ import org.springframework.context.annotation.Import;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Produces mock datacd
- */
-
 @SpringBootApplication
 @Import({WebRootConfig.class})
 public class ClickhouseClientApplication {
-
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(ClickhouseClientApplication.class);
         Map<String, Object> map = new HashMap<>();
@@ -25,5 +20,4 @@ public class ClickhouseClientApplication {
         application.setDefaultProperties(map);
         application.run(args);
     }
-
 }

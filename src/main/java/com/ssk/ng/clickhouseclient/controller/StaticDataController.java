@@ -11,7 +11,7 @@ import java.util.List;
 import static  com.ssk.ng.clickhouseclient.Constants.*;
 
 @RestController
-public class GuiStaticData {
+public class StaticDataController {
     @GetMapping("/forwardCcyPairs")
     public List<Currency> getForwardCcyPairs() {
         List<Currency> currencies = new ArrayList<>();
