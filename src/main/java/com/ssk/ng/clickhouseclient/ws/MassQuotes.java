@@ -10,17 +10,14 @@ import lombok.Data;
 public class MassQuotes {
 
     private String symbol;
+    private Date tradeDate;
+    private Date spotDate;
     private Date settleDate;
     private int exchangeId;
     private String customerId;
     private String sessionId;
-    private int pricingProfileId;
-    private String instrumentType;
-    private boolean deliverable;
-    private Date spotDate;
+    private String stream;
     private double bid;
     private double ask;
-    private boolean tfxLarge;
     private double spread;
-
 }

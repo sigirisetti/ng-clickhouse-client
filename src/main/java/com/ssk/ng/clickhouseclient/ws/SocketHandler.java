@@ -1,7 +1,7 @@
 package com.ssk.ng.clickhouseclient.ws;
 
 import com.google.gson.Gson;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -9,16 +9,11 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import lombok.extern.slf4j.Slf4j;
-
-import static  com.ssk.ng.clickhouseclient.Constants.*;
+import static com.ssk.ng.clickhouseclient.Constants.FWD_CCY_PAIRS;
+import static com.ssk.ng.clickhouseclient.Constants.initialPrices;
 
 @Component
 @Slf4j
@@ -27,11 +22,13 @@ public class SocketHandler extends TextWebSocketHandler {
     private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
     private Random rnd = new Random();
     private Gson gson = new Gson();
+    private Date tradeDate;
     private Date settleDate;
     private Date spotDate;
 
     public SocketHandler() {
         Calendar cal = Calendar.getInstance();
+        tradeDate = cal.getTime();
         cal.add(Calendar.DAY_OF_MONTH, 2);
         settleDate = cal.getTime();
         spotDate = cal.getTime();
@@ -76,20 +73,16 @@ public class SocketHandler extends TextWebSocketHandler {
         int exchangeId = 10;
         String customerId = "TFX";
         String sessionId = "TFX_TEST";
-        int pricingProfileId = 111;
-        String instrumentType = "SPOT";
-        boolean deliverable = false;
-        boolean tfxLarge = false;
 
         if (System.currentTimeMillis() % 2 == 0) {
-            return new GuiData("NORMAL", MarketData.class.getName(),  new MarketData(symbol, settleDate, marketBid, marketAsk));
+            return new GuiData("NORMAL", MarketData.class.getName(), new MarketData(symbol, settleDate, marketBid, marketAsk));
         } else {
-            double bid = marketBid - rnd.nextDouble() * 0.001;
-            double ask = marketAsk + rnd.nextDouble() * 0.001;
+            double bid = marketBid * 0.95;
+            double ask = marketAsk * 1.05;
             double spread = ask - bid;
             return new GuiData("NORMAL", MassQuotes.class.getName(),
-                    new MassQuotes(symbol, settleDate, exchangeId, customerId, sessionId, pricingProfileId,
-                            instrumentType, deliverable, spotDate, bid, ask, tfxLarge, spread));
+                    new MassQuotes(symbol, tradeDate, spotDate, settleDate, exchangeId, customerId, sessionId, "Simulation",
+                            bid, ask, spread));
         }
     }
 
