@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<connections>
-    <client-conn-config>
-        <hostname>localhost</hostname>
-        <port>8123</port>
-        <username>default</username>
-        <password></password>
-    </client-conn-config>
-</connections>

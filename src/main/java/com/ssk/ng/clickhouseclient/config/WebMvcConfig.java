@@ -2,7 +2,7 @@ package com.ssk.ng.clickhouseclient.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.ssk.ng.clickhouseclient.session.ClickHouseDataSourceProvider;
+import com.ssk.ng.clickhouseclient.web.session.ClickhouseDataSourceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -62,11 +62,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
             registry.addResourceHandler("/**").addResourceLocations(
                     CLASSPATH_RESOURCE_LOCATIONS);
         }
-    }
-
-    @Bean
-    @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public ClickHouseDataSourceProvider clickHouseDataSourceProvider() {
-        return new ClickHouseDataSourceProvider();
     }
 }

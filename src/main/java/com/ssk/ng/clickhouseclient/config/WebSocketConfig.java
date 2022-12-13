@@ -1,6 +1,6 @@
 package com.ssk.ng.clickhouseclient.config;
 
-import com.ssk.ng.clickhouseclient.ws.SocketHandler;
+import com.ssk.ng.clickhouseclient.websocket.SocketHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

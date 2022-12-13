@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient.controller;
+package com.ssk.ng.clickhouseclient.web.controller;
 
 import com.ssk.ng.clickhouseclient.model.Currency;
 

@@ -1,45 +1,47 @@
-package com.ssk.ng.clickhouseclient.session;
+package com.ssk.ng.clickhouseclient.dao;
 
-import com.clickhouse.jdbc.ClickHouseDataSource;
 import com.ssk.ng.clickhouseclient.model.AllConnections;
 import com.ssk.ng.clickhouseclient.model.ClientConnectionConfig;
-import lombok.extern.slf4j.Slf4j;
 
+import javax.swing.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.ssk.ng.clickhouseclient.db.ClickhouseDatasourceInitializer.createDataSource;
-
-@Slf4j
-public class ClickHouseDataSourceProvider {
+public class ConnConfigFileDaoImpl implements ConnConfigFileDao {
 
     public static final String CLICKHOUSE_CLIENT_CONN_CONFIG_XML = "clickhouse-client-conn-config.xml";
 
-    private String selectedEnv;
+    private JFrame parent;
 
-    private Map<String, ClickHouseDataSource> dataSourceMap = new HashMap<>();
+    @Override
+    public String saveConnConfig(List<ClientConnectionConfig> connConfigList) {
+        JAXBContext jaxbContext = null;
+        try {
+            jaxbContext = JAXBContext.newInstance(AllConnections.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-    private Map<String, ClientConnectionConfig> connectionConfigMap = new HashMap<>();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-    public ClickHouseDataSource getClickHouseDataSource() throws SQLException {
-        if (dataSourceMap.containsKey(selectedEnv)) {
-            return dataSourceMap.get(selectedEnv);
+            AllConnections allConnections = new AllConnections();
+            allConnections.setAllConnConfigs(connConfigList);
+
+            jaxbMarshaller.marshal(allConnections, System.out);
+
+            jaxbMarshaller.marshal(allConnections, getConnConfigFilePath());
+            return null;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return e.getMessage();
         }
-        ClickHouseDataSource dataSource = createDataSource(connectionConfigMap.get(selectedEnv));
-        dataSourceMap.put(selectedEnv, dataSource);
-        log.info("Created datasource for selected env : {}", selectedEnv);
-        return dataSource;
     }
 
-
+    @Override
     public List<ClientConnectionConfig> loadConnConfig() {
         JAXBContext jaxbContext = null;
         try {
@@ -67,17 +69,4 @@ public class ClickHouseDataSourceProvider {
         URL url = Thread.currentThread().getContextClassLoader().getResource(CLICKHOUSE_CLIENT_CONN_CONFIG_XML);
         return new File(url.toExternalForm());
     }
-
-    public String getSelectedEnv() {
-        return selectedEnv;
-    }
-
-    public void setSelectedEnv(String selectedEnv) {
-        this.selectedEnv = selectedEnv;
-    }
-
-    public Map<String, ClickHouseDataSource> getDataSourceMap() {
-        return dataSourceMap;
-    }
-
 }

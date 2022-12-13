@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient.ws;
+package com.ssk.ng.clickhouseclient.websocket;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

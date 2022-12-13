@@ -1,10 +1,10 @@
 package com.ssk.ng.clickhouseclient.dao;
 
+import com.clickhouse.jdbc.ClickHouseConnection;
 import com.ssk.ng.clickhouseclient.model.Column;
 import com.ssk.ng.clickhouseclient.model.Database;
 import com.ssk.ng.clickhouseclient.model.Table;
-import ru.yandex.clickhouse.ClickHouseConnection;
-import ru.yandex.clickhouse.ClickHouseDataSource;
+import com.ssk.ng.clickhouseclient.web.session.ClickhouseDataSourceProvider;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,19 +12,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbMetaDataDaoImpl {
+public class DbMetaDataDaoImpl implements DbMetaDataDao {
 
 
-    private final ClickHouseDataSource dataSource;
+    private final ClickhouseDataSourceProvider provider;
 
-    public DbMetaDataDaoImpl(ClickHouseDataSource dataSource) {
-        this.dataSource = dataSource;
+    public DbMetaDataDaoImpl(ClickhouseDataSourceProvider provider) {
+        this.provider = provider;
     }
 
-    public List<Database> getDatabases() {
+
+    @Override
+    public List<Database> getDatabases() throws SQLException {
         List<Database> dbs = new ArrayList<>();
-        try (ClickHouseConnection connection = dataSource.getConnection();
-             PreparedStatement ps = connection.prepareStatement("show databases")) {
+        try (ClickHouseConnection connection = provider.getClickHouseDataSource().getConnection()) {
+             PreparedStatement ps = connection.prepareStatement("show databases");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     dbs.add(new Database(rs.getString("name")));
@@ -46,7 +48,7 @@ public class DbMetaDataDaoImpl {
 
     private void populateTables(Database db) {
         List<Table> tables = new ArrayList<>();
-        try (ClickHouseConnection connection = dataSource.getConnection()) {
+            try (ClickHouseConnection connection = provider.getClickHouseDataSource().getConnection()) {
             String sql = String.format("show tables from %s", db.getName());
             PreparedStatement ps = connection.prepareStatement(sql);
             try (ResultSet rs = ps.executeQuery()) {
@@ -69,7 +71,7 @@ public class DbMetaDataDaoImpl {
 
     private void populateTableColumns(Database db, Table t) {
         List<Column> cols = new ArrayList<>();
-        try (ClickHouseConnection connection = dataSource.getConnection()) {
+            try (ClickHouseConnection connection = provider.getClickHouseDataSource().getConnection()) {
             String sql = String.format("describe %s.%s", db.getName(), t.getName());
             PreparedStatement ps = connection.prepareStatement(sql);
             try (ResultSet rs = ps.executeQuery()) {

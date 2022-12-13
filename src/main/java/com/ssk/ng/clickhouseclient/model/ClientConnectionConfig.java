@@ -7,15 +7,17 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
 @XmlRootElement(name = "client-conn-config")
-@XmlType(propOrder = {"hostname", "port", "username", "password"})
+@XmlType(propOrder = {"env", "hostname", "port", "username", "password"})
 public class ClientConnectionConfig {
 
+    private String env;
     private String hostname;
     private int port;
     private String username;
     private String password;
 
-    public ClientConnectionConfig(String hostname, int port, String username, String password) {
+    public ClientConnectionConfig(String env, String hostname, int port, String username, String password) {
+        this.env = env;
         this.hostname = hostname;
         this.port = port;
         this.username = username;
@@ -23,6 +25,14 @@ public class ClientConnectionConfig {
     }
 
     public ClientConnectionConfig() {
+    }
+
+    public String getEnv() {
+        return env;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
     }
 
     public String getHostname() {
@@ -58,7 +68,9 @@ public class ClientConnectionConfig {
     }
 
     public boolean validate() {
-        return StringUtils.isNotBlank(hostname) && port > 0 && StringUtils.isBlank(username);
+        return StringUtils.isBlank(env)
+                && StringUtils.isNotBlank(hostname) && port > 0
+                && StringUtils.isBlank(username);
     }
 
     @Override
@@ -66,16 +78,16 @@ public class ClientConnectionConfig {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClientConnectionConfig that = (ClientConnectionConfig) o;
-        return port == that.port && Objects.equals(hostname, that.hostname) && Objects.equals(username, that.username) && Objects.equals(password, that.password);
+        return port == that.port && Objects.equals(env, that.env) && Objects.equals(hostname, that.hostname) && Objects.equals(username, that.username) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hostname, port, username, password);
+        return Objects.hash(env, hostname, port, username, password);
     }
 
     @Override
     public String toString() {
-        return hostname + ":" + port + "/" + username;
+        return env + "[ " + hostname + ":" + port + "/" + username + "]";
     }
 }

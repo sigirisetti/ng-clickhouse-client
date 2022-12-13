@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient.ws;
+package com.ssk.ng.clickhouseclient.websocket;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;

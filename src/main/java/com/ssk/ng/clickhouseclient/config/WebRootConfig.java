@@ -1,5 +1,6 @@
 package com.ssk.ng.clickhouseclient.config;
 
+import com.ssk.ng.clickhouseclient.dao.ClickhouseClientDaoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -8,7 +9,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 
-@Import({AppConfig.class, WebMvcConfig.class, WebSocketConfig.class})
+@Import({
+        AppConfig.class,
+        WebMvcConfig.class,
+        ClickhouseClientDaoConfiguration.class,
+        WebSocketConfig.class
+})
 public class WebRootConfig {
 
     @Bean
