@@ -4,6 +4,6 @@
         <hostname>localhost</hostname>
         <port>8123</port>
         <username>default</username>
-        <password>Lalli@321</password>
+        <password></password>
     </client-conn-config>
 </connections>
