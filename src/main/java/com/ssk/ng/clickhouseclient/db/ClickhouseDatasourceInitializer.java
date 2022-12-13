@@ -1,6 +1,7 @@
 package com.ssk.ng.clickhouseclient.db;
 
 import com.clickhouse.jdbc.ClickHouseDataSource;
+import com.ssk.ng.clickhouseclient.model.ClientConnectionConfig;
 import ru.yandex.clickhouse.settings.ClickHouseConnectionSettings;
 
 import java.sql.SQLException;

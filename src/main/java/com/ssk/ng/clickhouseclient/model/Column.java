@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient.db;
+package com.ssk.ng.clickhouseclient.model;
 
 import java.util.Objects;
 

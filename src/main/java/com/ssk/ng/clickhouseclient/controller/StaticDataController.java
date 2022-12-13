@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-import static  com.ssk.ng.clickhouseclient.Constants.*;
+import static com.ssk.ng.clickhouseclient.config.Constants.*;
 
 @RestController
 public class StaticDataController {

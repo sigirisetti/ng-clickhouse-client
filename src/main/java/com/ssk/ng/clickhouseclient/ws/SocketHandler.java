@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.ssk.ng.clickhouseclient.Constants.FWD_CCY_PAIRS;
-import static com.ssk.ng.clickhouseclient.Constants.initialPrices;
+import static com.ssk.ng.clickhouseclient.config.Constants.FWD_CCY_PAIRS;
+import static com.ssk.ng.clickhouseclient.config.Constants.initialPrices;
 
 @Component
 @Slf4j

@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient.db;
+package com.ssk.ng.clickhouseclient.model;
 
 import org.apache.commons.lang3.StringUtils;
 

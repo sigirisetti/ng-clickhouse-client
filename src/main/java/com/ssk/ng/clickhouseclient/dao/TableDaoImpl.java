@@ -1,7 +1,7 @@
 package com.ssk.ng.clickhouseclient.dao;
 
-import com.ssk.ng.clickhouseclient.db.Column;
-import com.ssk.ng.clickhouseclient.db.Table;
+import com.ssk.ng.clickhouseclient.model.Column;
+import com.ssk.ng.clickhouseclient.model.Table;
 import ru.yandex.clickhouse.ClickHouseConnection;
 import ru.yandex.clickhouse.ClickHouseDataSource;
 
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TableDao {
+public class TableDaoImpl {
 
     private final String SELECT_TABLE_DATA_SQL = "SELECT %s FROM %s.%s LIMIT 1000";
 
     private final ClickHouseDataSource dataSource;
 
-    public TableDao(ClickHouseDataSource dataSource) {
+    public TableDaoImpl(ClickHouseDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

@@ -1,4 +1,4 @@
-package com.ssk.ng.clickhouseclient;
+package com.ssk.ng.clickhouseclient.config;
 
 public interface Constants {
     String[] FWD_CCY_PAIRS = new String[]{
