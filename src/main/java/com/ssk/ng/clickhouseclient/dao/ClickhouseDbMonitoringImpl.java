@@ -22,7 +22,7 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
             "        min(min_time) AS min_time, " +
             "        max(max_time) AS max_time, " +
             "        toUInt32((max_time - min_time) / 86400) AS days, " +
-            "        size / ((max_time - min_time) / 86400) AS avgDaySize " +
+            "        size / ((max_time - min_time) / 86400) AS avgDailySize " +
             "    FROM system.parts " +
             "    WHERE active " +
             "    GROUP BY table, database " +
@@ -36,7 +36,7 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
             "        min(min_time) AS min_time, " +
             "        max(max_time) AS max_time, " +
             "        toUInt32((max_time - min_time) / 86400) AS days, " +
-            "        size / ((max_time - min_time) / 86400) AS avgDaySize " +
+            "        size / ((max_time - min_time) / 86400) AS avgDailySize " +
             "    FROM system.parts " +
             "    WHERE database = ? " +
             "    GROUP BY table, database " +
@@ -110,7 +110,7 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
                     rs.getDate("min_time"),
                     rs.getDate("max_time"),
                     rs.getLong("days"),
-                    rs.getLong("avgDaySize")
+                    rs.getLong("avgDailySize")
             ));
         }
     }
