@@ -26,7 +26,7 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
             "    FROM system.parts " +
             "    WHERE active " +
             "    GROUP BY table, database " +
-            "    ORDER BY rows DESC";
+            "    ORDER BY size DESC";
 
     private static final String DATABASE_SYSTEM_PARTS_SQL = "SELECT " +
             "        table, " +
@@ -40,7 +40,7 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
             "    FROM system.parts " +
             "    WHERE database = ? " +
             "    GROUP BY table, database " +
-            "    ORDER BY rows DESC";
+            "    ORDER BY size DESC";
 
     private final ClickhouseDataSourceProvider provider;
 
@@ -114,5 +114,4 @@ public class ClickhouseDbMonitoringImpl implements ClickhouseDbMonitoring {
             ));
         }
     }
-
 }
